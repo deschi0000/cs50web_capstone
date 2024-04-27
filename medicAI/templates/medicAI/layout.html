@@ -1,16 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>MedicAI</title>
+            {% load bootstrap5 %}
+            {% bootstrap_css %}
+            {% bootstrap_javascript %}
 
-    {% load bootstrap5 %}
-    <!-- {% load static %} -->
-    <!-- <script src="{% static 'script.js' %}" defer></script> -->
-    </head>
-    <body>
-        {% block body %}
-        {% endblock %}
-        </div>
-    </body>
-</html>
+            <!-- Need both the following to load a static file -->
+            {% load static %}
+            <script src="{% static 'medicAI/script.js' %}" defer></script>
+
+            <link href="{% static 'medicAI/styles.css' %}" rel="stylesheet">
+        </head>
+        <body>
+            <nav class="navbar navbar-expand-lg nav-background">
+                    <ul class="nav bg-dark w-100">
+                        <li>
+                            <a class="navbar-brand nav-link link-light" href="/">MEDIC AI Capstone Project</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                            </button>
+                        
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-light" href="/">HOME</a>
+                        </li>
+    
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link link-light" href="" id="user-logo"></a>
+                            </li>
+    
+                            <li class="nav-item">
+                                <a class="nav-link link-light" href="">PATIENTS</a>
+                            </li>
+    
+                            <li class="nav-item">
+                                <a class="nav-link link-light" href="{% url 'logout' %}" name="logout">Log Out</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link link-light" href="{% url 'login' %}">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>   
+                </div>  
+            </nav>
+
+            {% block body %}
+            {% endblock %}
+
+            <footer>
+                <nav class="navbar fixed-bottom nav-background nav bg-dark">
+                  <h6 class="display-50 navbar-text text-light">&copy; Copyright 2024. All Rights reserved.</h6>
+                </nav>
+              </footer>
+        </body>
+    </html>
+
+<!DOCTYPE html>
