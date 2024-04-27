@@ -4,11 +4,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 
 
-def index(request):
-    # If no user is signed in, return to login page:
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("login"))
-    return render(request, "users/user.html")
+# def index(request):
+#     # If no user is signed in, return to login page:
+#     if not request.user.is_authenticated:
+#         return HttpResponseRedirect(reverse("login"))
+#     return render(request, "users/user.html")
 
 
 def login_view(request):
@@ -34,6 +34,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return render(request, "users/login.html", {
-                "message": "Logged Out"
-            })
+    return HttpResponseRedirect(reverse("index"))
+    # return render(request, "users/login.html", {
+    #             "message": "Logged Out"
+    #         })
