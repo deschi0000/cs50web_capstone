@@ -24,7 +24,6 @@ class Patient(models.Model):
         ('Other', 'Other'),
     ]
 
-    patient_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     dob = models.DateField()
