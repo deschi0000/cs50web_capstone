@@ -2,7 +2,46 @@
 
 {% block body %}
     <div class="container">
-        <p>hello</p>
+        <!-- Display the error message if there are no patients -->
+        {% if message%}
+        <p>{{message}}</p>
+        {% endif %}
+
+        <!-- Show all of the patients if they are in the database -->
+        {% if patients %}
+            {% for patient in patients %}
+            <p>{{ patient.first_name }} {{patient.last_name}}</p>
+            <br/>
+            {% endfor %}
+        {% endif %}
+
+
+        {% if hospital_visits %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td class="col">ID</td>
+                    <td class="col">Name</td>
+                    <td class="col">Acuity</td>
+                    <td class="col">Prepped</td>
+                    <td class="col">Edit</td>
+                </tr>
+            </thead>
+            {% for visit in hospital_visits %}
+            <tr>
+                <td>{{ visit.id }}</td>
+                <td>{{ visit.patient.last_name }}, {{ visit.patient.first_name }}</td>
+                <td>{{visit.acuity}}</td>
+                <td>{{visit.seen_nurse}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa-solid fa-notes-medical"></i>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
 
     </div>
 
