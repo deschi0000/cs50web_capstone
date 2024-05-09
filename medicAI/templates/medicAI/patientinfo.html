@@ -31,7 +31,7 @@
                         <li class="list-group-item">ADDRESS: {{ patient.address }}</li>
                         <li class="list-group-item">PHONE: {{ patient.phone_number }}</li>
                     <a href="{% url 'editpatientinfo' patient_id=patient.id %}" class="btn btn-primary btn-sm" style="margin-top: 1rem;"><i class="fas fa-pencil-alt"></i> Edit</a>
-                    <a href="{% url 'patientlist' %}" class="btn btn-primary btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Return To ER List</a>
+                    <a href="{% url 'patientlist' %}" class="btn btn-warning btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Return To ER List</a>
 
                 </div>
             </div>
@@ -58,7 +58,7 @@
                     <h5 class="card-title" style="font-size: 15px; font-weight: bold;">NOTES</h5>
                     <ul class="list-group">
                         <li class="list-group-item">NOTES:</li>
-                        <li class="list-group-item">DIAGNOSIS:</li>
+                        <li class="list-group-item">PRESCRIPTION:</li>
                     </ul>
                 </div>
             </div>
