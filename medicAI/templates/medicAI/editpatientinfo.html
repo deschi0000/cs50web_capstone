@@ -42,27 +42,34 @@
                         <ul class="list-group">
                             <!-- <li class="list-group-item">ACUITY: <input type="text" class='form-control' name="acuity"  value="{{ current_visit.acuity }}"></li> -->
                             <li class="list-group-item">ACUITY:
-                                <input type="radio" id="one" name="acuity" value=1>
+                                <input type="radio" id="one" name="acuity" value="1" checked="{% if patient.acuity == '1' %} checked {% endif %}">
                                 <label for="one">1</label>
-                                <input type="radio" id="two" name="acuity" value=2>
+                                <input type="radio" id="two" name="acuity" value="2" checked="{% if patient.acuity == '2' %} checked {% endif %}">
                                 <label for="two">2</label>
-                                <input type="radio" id="three" name="acuity" value=3>
+                                <input type="radio" id="three" name="acuity" value="3" checked="{% if patient.acuity == '3' %} checked {% endif %}">
                                 <label for="three">3</label>
-                                <input type="radio" id="four" name="acuity" value=4>
+                                <input type="radio" id="four" name="acuity" value="4" checked="{% if patient.acuity == '4' %} checked {% endif %}">
                                 <label for="four">4</label>
-                                <input type="radio" id="five" name="acuity" value=5>
+                                <input type="radio" id="five" name="acuity" value="5" checked="{% if patient.acuity == '5' %} checked {% endif %}">
                                 <label for="five">5</label><br>
                             </li>
                             <li class="list-group-item">TEMPERATURE: <input type="text" class='form-control' name="temperature" value="{{ current_visit.temperature }}"></li>
                             <li class="list-group-item">HEART RATE: <input type="text" class='form-control' name="heart_rate" value="{{ current_visit.heart_rate }}"></li>
                             <!-- <li class="list-group-item">SEEN NURSE: <input type="text" class='form-control' name="seen_nurse" value="{{ current_visit.seen_nurse }}"> -->
                             <li class="list-group-item">SEEN NURSE:
-                                <input type="radio" id="true" name="seen_nurse" value="True">
+                                <input type="radio" id="true" name="seen_nurse" value="True" 
+                                {% if patient.seen_nurse is True %} 
+                                    checked 
+                                {% endif %} >
                                 <label for="true">True</label>
-                                <input type="radio" id="false" name="seen_nurse" value="False">
+                                <input type="radio" id="false" name="seen_nurse" value="False" 
+                                {% if patient.seen_nurse is False %} 
+                                checked 
+                                {% endif %}>
                                 <label for="false">False</label><br>
-
                             </li>
+                            
+
                             <li class="list-group-item">SYMPTOM START: 
                                 <div class="col-sm-4">
                                     <div class="input-group date" id="datepicker">
@@ -76,8 +83,8 @@
                                 </div>
 
                             </li>
-                            <button class="btn btn-primary btn-sm" style="margin-top: 1rem;" type="submit"><i class="fas fa-pencil-alt"></i>Update</button>     
-                            <a href="{% url 'patientinfo' patient_id=patient.id %}" class="btn btn-warning btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Return To Patient</a>
+                            <button class="btn btn-primary btn-sm" style="margin-top: 1rem;" type="submit"><i class="fas fa-pencil-alt"></i> Update </button>     
+                            <a href="{% url 'patientinfo' patient_id=patient.id %}" class="btn btn-warning btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Cancel </a>
                             
                         </ul>
                     </div>
