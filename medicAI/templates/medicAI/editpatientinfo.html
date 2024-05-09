@@ -1,0 +1,69 @@
+{% extends "medicAI/layout.html" %}
+
+{% block body %}
+<div class="container" style="margin-top: 1rem; margin-bottom: 3rem;">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 15px; font-weight: bold;">PATIENT</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">FIRST NAME: {{ patient.first_name }}</li>
+                        <li class="list-group-item">LAST NAME: {{ patient.last_name }}</li>
+                        <li class="list-group-item">DOB: {{ patient.dob }}</li>
+                        <li class="list-group-item">SEX: {{ patient.sex }}</li>
+                        <li class="list-group-item">HEIGHT: {{ patient.height }} CM</li>
+                        <li class="list-group-item">WEIGHT: {{ patient.weight }} KG</li>
+                        <li class="list-group-item">BLOOD TYPE: {{ patient.blood_type }}</li>
+                        <li class="list-group-item">
+                            <h6>Visits:</h6>
+                            <ul class="list-group" style="list-style-type: none; padding-left: 0;">
+                                {% for visit in visit_list %}
+                                <li>{{ visit.symptom_start_date }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                    <br/>
+                    <h5 class="card-title" style="font-size: 15px; font-weight: bold;">CONTACT</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">OHIP: {{ patient.ohip }}</li>
+                        <li class="list-group-item">ADDRESS: {{ patient.address }}</li>
+                        <li class="list-group-item">PHONE: {{ patient.phone_number }}</li>
+                    <a href="#" class="btn btn-primary btn-sm" style="margin-top: 1rem;"><i class="fas fa-pencil-alt"></i> Update</a>
+                    <a href="{% url 'patientinfo' patient_id=patient.id %}" class="btn btn-primary btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Return To Patient</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 15px; font-weight: bold;">AI DIAGNOSES</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">ACUITY: {{ current_visit.acuity }}</li>
+                        <li class="list-group-item">TEMPERATURE: {{ current_visit.temperature }} C</li>
+                        <li class="list-group-item">HEART RATE: {{ current_visit.heart_rate }} BPM</li>
+                        <li class="list-group-item">SEEN NURSE: {{ current_visit.seen_nurse }} </li>
+                        <li class="list-group-item">SYMPTOM START: {{ current_visit.symptom_start_date }}</li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="card" style="border: none; border-radius: 5px; margin-bottom: 1rem;">
+
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 15px; font-weight: bold;">NOTES</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">NOTES:</li>
+                        <li class="list-group-item">DIAGNOSIS:</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
