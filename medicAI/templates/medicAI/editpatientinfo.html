@@ -41,34 +41,28 @@
                         <h5 class="card-title" style="font-size: 15px; font-weight: bold;">AI DIAGNOSES</h5>
                         <ul class="list-group">
                             <!-- <li class="list-group-item">ACUITY: <input type="text" class='form-control' name="acuity"  value="{{ current_visit.acuity }}"></li> -->
-                            <li class="list-group-item">ACUITY:
-                                <input type="radio" id="one" name="acuity" value="1" checked="{% if patient.acuity == '1' %} checked {% endif %}">
+                            <li class="list-group-item">ACUITY
+                                <input type="radio" id="one" name="acuity" value="1" {% if current_visit.acuity == '1' %} checked {% endif %}>
                                 <label for="one">1</label>
-                                <input type="radio" id="two" name="acuity" value="2" checked="{% if patient.acuity == '2' %} checked {% endif %}">
+                                <input type="radio" id="two" name="acuity" value="2" {% if current_visit.acuity == '2' %} checked {% endif %}>
                                 <label for="two">2</label>
-                                <input type="radio" id="three" name="acuity" value="3" checked="{% if patient.acuity == '3' %} checked {% endif %}">
+                                <input type="radio" id="three" name="acuity" value="3" {% if current_visit.acuity == '3' %} checked {% endif %}>
                                 <label for="three">3</label>
-                                <input type="radio" id="four" name="acuity" value="4" checked="{% if patient.acuity == '4' %} checked {% endif %}">
+                                <input type="radio" id="four" name="acuity" value="4" {% if current_visit.acuity == '4' %} checked {% endif %}>
                                 <label for="four">4</label>
-                                <input type="radio" id="five" name="acuity" value="5" checked="{% if patient.acuity == '5' %} checked {% endif %}">
+                                <input type="radio" id="five" name="acuity" value="5" {% if current_visit.acuity == '5' %} checked {% endif %}>
                                 <label for="five">5</label><br>
                             </li>
                             <li class="list-group-item">TEMPERATURE: <input type="text" class='form-control' name="temperature" value="{{ current_visit.temperature }}"></li>
                             <li class="list-group-item">HEART RATE: <input type="text" class='form-control' name="heart_rate" value="{{ current_visit.heart_rate }}"></li>
                             <!-- <li class="list-group-item">SEEN NURSE: <input type="text" class='form-control' name="seen_nurse" value="{{ current_visit.seen_nurse }}"> -->
                             <li class="list-group-item">SEEN NURSE:
-                                <input type="radio" id="true" name="seen_nurse" value="True" 
-                                {% if patient.seen_nurse is True %} 
-                                    checked 
-                                {% endif %} >
+                                <input type="radio" id="true" name="seen_nurse" value="True" {% if current_visit.seen_nurse %} checked {% endif %}>
                                 <label for="true">True</label>
-                                <input type="radio" id="false" name="seen_nurse" value="False" 
-                                {% if patient.seen_nurse is False %} 
-                                checked 
-                                {% endif %}>
+                                <input type="radio" id="false" name="seen_nurse" value="False" {% if not current_visit.seen_nurse %} checked {% endif %}>
                                 <label for="false">False</label><br>
                             </li>
-                            
+                            {{patient.seen_nurse}}
 
                             <li class="list-group-item">SYMPTOM START: 
                                 <div class="col-sm-4">
