@@ -62,7 +62,7 @@ class Hospital_Visit(models.Model):
         validators=[MinValueValidator(30), MaxValueValidator(45)]
     )
     heart_rate = models.IntegerField(null=True, blank=True)
-    perscription = models.CharField(max_length=200, blank=True)
+    prescription = models.CharField(max_length=200, blank=True)
     diagnosis = models.CharField(max_length=200, blank=True)
     seen_nurse = models.BooleanField(default=False)
 
