@@ -8,6 +8,10 @@ from medicAI.models import Hospital_Visit, Patient
 
 def index(request):
 
+    return render(request, "medicAI/index.html")
+
+def patientlist(request):
+
     # Use try/except to find patients in the db
     # all_patients = Patient.objects.all()
     # context = {
@@ -23,7 +27,7 @@ def index(request):
     context = {
         "hospital_visits": all_hospital_visits
     }
-    return render(request, "medicAI/index.html", context)
+    return render(request, "medicAI/patientlist.html", context)
 
 def patient_info(request, patient_id):
     patient = Patient.objects.get(pk=patient_id)
