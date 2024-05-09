@@ -42,7 +42,7 @@ def patient_info(request, patient_id):
     context= {
         'patient': patient,
         'visit_list' : visit_list,
-        'most_recent_visit': most_recent_visit
+        'current_visit': most_recent_visit
     }
 
     return render(request, "medicAI/patientinfo.html", context)
