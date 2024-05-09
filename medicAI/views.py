@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist, EmptyResultSet
 
@@ -49,8 +50,15 @@ def patient_info(request, patient_id):
 
 def edit_patient_info(request, patient_id):
     patient = Patient.objects.get(pk=patient_id)
-    
+    current_visit = Hospital_Visit.objects.filter(id=patient_id).order_by('-symptom_start_date').first()
+
+    if request.method == 'POST':
+        print("trying to post form")
+
+        return HttpResponseRedirect(f"/patientinfo/{patient_id}")
+
     context = {
-        'patient': patient
+        'patient': patient,
+        'current_visit': current_visit
     }
     return render(request, "medicAI/editpatientinfo.html", context) 
