@@ -33,10 +33,12 @@
                 <td>{{ visit.patient.last_name }}, {{ visit.patient.first_name }}</td>
                 <td>{{visit.acuity}}</td>
                 <td>{{visit.seen_nurse}}</td>
-                <td>
-                    <button type="button" class="btn btn-primary">
-                        <i class="fa-solid fa-notes-medical"></i>
-                    </button>
+                <td class=" text-left">
+                    <a class="nav-link link-light" href="{% url 'patientinfo' patient_id=visit.patient.id %}">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa-solid fa-notes-medical"></i>
+                        </button>
+                    </a>
                 </td>
             </tr>
             {% endfor %}
