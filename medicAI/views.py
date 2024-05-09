@@ -46,3 +46,11 @@ def patient_info(request, patient_id):
     }
 
     return render(request, "medicAI/patientinfo.html", context)
+
+def edit_patient_info(request, patient_id):
+    patient = Patient.objects.get(pk=patient_id)
+    
+    context = {
+        'patient': patient
+    }
+    return render(request, "medicAI/editpatientinfo.html", context) 
