@@ -41,13 +41,12 @@
                 <div class="card-body">
                     <h5 class="card-title" style="font-size: 15px; font-weight: bold;">AI DIAGNOSES</h5>
                     <ul class="list-group">
-                        <li class="list-group-item">FIRST NAME: {{ patient.first_name }}</li>
-                        <li class="list-group-item">LAST NAME: {{ patient.last_name }}</li>
-                        <li class="list-group-item">DOB: {{ patient.dob }}</li>
-                        <li class="list-group-item">SEX: {{ patient.sex }}</li>
-                        <li class="list-group-item">HEIGHT: {{ patient.height }} CM</li>
-                        <li class="list-group-item">WEIGHT: {{ patient.weight }} KG</li>
-                        <li class="list-group-item">BLOOD TYPE: {{ patient.blood_type }}</li>
+                        <li class="list-group-item">ACUITY: {{ current_visit.acuity }}</li>
+                        <li class="list-group-item">TEMPERATURE: {{ current_visit.temperature }} C</li>
+                        <li class="list-group-item">HEART RATE: {{ current_visit.heart_rate }} BPM</li>
+                        <li class="list-group-item">SEEN NURSE: {{ current_visit.seen_nurse }} </li>
+                        <li class="list-group-item">SYMPTOM START: {{ current_visit.symptom_start_date }}</li>
+
                     </ul>
                 </div>
             </div>
