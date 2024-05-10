@@ -67,7 +67,8 @@
                             <li class="list-group-item">SYMPTOM START: 
                                 <div class="col-sm-4">
                                     <div class="input-group date" id="datepicker">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control"
+                                            name="symptom_start" value="{{ current_visit.symptom_start_date }}">
                                         <span class="input-group-append">
                                             <span class="input-group-text bg-white">
                                                 <i class="fa fa-calendar"></i>
@@ -75,7 +76,9 @@
                                         </span>
                                     </div>
                                 </div>
-
+                                <!-- <input type="date" class="form-control" value="{{ current_visit.symptom_start_date }}"> -->
+                                
+                                
                             </li>
                             <button class="btn btn-primary btn-sm" style="margin-top: 1rem;" type="submit"><i class="fas fa-pencil-alt"></i> Update </button>     
                             <a href="{% url 'patientinfo' patient_id=patient.id %}" class="btn btn-warning btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Cancel </a>
@@ -87,8 +90,8 @@
                     <div class="card-body">
                         <h5 class="card-title" style="font-size: 15px; font-weight: bold;">NOTES</h5>
                         <ul class="list-group">
-                            <li class="list-group-item">NOTES:<textarea class='form-control' name="seen_nurse">{{ current_visit.notes }}</textarea></li>
-                            <li class="list-group-item">PRESCRIPTION:<textarea class='form-control' name="seen_nurse">{{ current_visit.prescription }}</textarea></li>
+                            <li class="list-group-item">NOTES:<textarea class='form-control' name="diagnosis">{{ current_visit.diagnosis }}</textarea></li>
+                            <li class="list-group-item">PRESCRIPTION:<textarea class='form-control' name="prescription">{{ current_visit.prescription }}</textarea></li>
                         </ul>
                     </div>
                 </div>
