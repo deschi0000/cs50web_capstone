@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist, EmptyResultSet
@@ -54,6 +55,34 @@ def edit_patient_info(request, patient_id):
 
     if request.method == 'POST':
         print("trying to post form")
+
+        #Retrieve the values of the input fields being Posted
+        acuity = request.POST.get('acuity')
+        temperature = request.POST.get('temperature')
+        heart_rate = request.POST.get('heart_rate')
+        symptom_start = request.POST.get('symptom_start')
+        doctor_diagnosis = request.POST.get('diagnosis')
+        prescription = request.POST.get('prescription')
+
+        seen_nurse = request.POST.get('seen_nurse') # Convert from str to bool
+        if seen_nurse.lower() == 'true':
+            seen_nurse = True
+        else:
+            seen_nurse = False
+        
+        print("===================================================")
+        print(doctor_diagnosis)
+        print(prescription)
+        print("===================================================")
+
+        current_visit.acuity = acuity
+        current_visit.temperature = temperature
+        current_visit.heart_rate = heart_rate
+        current_visit.symptom_start_date = datetime.strptime(symptom_start,'%m/%d/%Y')
+        current_visit.diagnosis = doctor_diagnosis
+        current_visit.prescription = prescription
+        current_visit.seen_nurse = seen_nurse
+        current_visit.save()
 
         return HttpResponseRedirect(f"/patientinfo/{patient_id}")
 
