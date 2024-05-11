@@ -7,7 +7,6 @@ from medicAI.models import Hospital_Visit, Patient
 
 # Create your views here.
 
-
 def index(request):
 
     return render(request, "medicAI/index.html")
@@ -27,7 +26,8 @@ def patientlist(request):
     all_hospital_visits = Hospital_Visit.objects.all().order_by('acuity')
     print(all_hospital_visits)
     context = {
-        "hospital_visits": all_hospital_visits
+        "hospital_visits": all_hospital_visits,
+        "date": datetime.today().date()
     }
     return render(request, "medicAI/patientlist.html", context)
 
