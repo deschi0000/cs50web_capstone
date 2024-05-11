@@ -23,7 +23,7 @@ def login_view(request):
         # If user object is returned, log in and route to index page:
         if user:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("patientlist"))
         # Otherwise, return login page again with new context
         else:
             return render(request, "users/login.html", {
