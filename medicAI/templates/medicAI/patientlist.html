@@ -1,5 +1,8 @@
 {% extends "medicAI/layout.html" %}
 
+<!-- Load localization filters -->
+{% load l10n %}
+
 {% block body %}
     <div class="container">
         <!-- Display the error message if there are no patients -->
@@ -15,6 +18,7 @@
             {% endfor %}
         {% endif %}
 
+        <h3 style="margin: 1rem 0;">PATIENT LIST - <span style="color: dimgray;">{{ date|localize }}</span></h3>
 
         {% if hospital_visits %}
         <table class="table table-hover">
