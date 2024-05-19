@@ -50,8 +50,6 @@
                         <li class="list-group-item"><span style="float: left;">OHIP</span><span class="text-primary" style="float: right;">{{ patient.ohip }}</span></li>
                         <li class="list-group-item"><span style="float: left;">ADDRESS</span><span class="text-primary" style="float: right;">{{ patient.address }}</span></li>
                         <li class="list-group-item"><span style="float: left;">PHONE</span><span class="text-primary" style="float: right;">{{ patient.phone_number }}</span></li>
-                    <a href="{% url 'editpatientinfo' patient_id=patient.id %}" class="btn btn-primary btn-sm" style="margin-top: 1rem;"><i class="fas fa-pencil-alt"></i> Edit</a>
-                    <a href="{% url 'patientlist' %}" class="btn btn-warning btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Return To ER List</a>
 
                 </div>
             </div>
@@ -67,12 +65,17 @@
                         <li class="list-group-item">SEEN NURSE &emsp;<span class="text-primary">{{ current_visit.seen_nurse }}</span> </li>
                         <li class="list-group-item">SYMPTOM START &emsp;<span class="text-primary">{{ current_visit.symptom_start_date }}</span></li>
                         <li class="list-group-item">SYMPTOMS &emsp;<span class="text-primary">{{ current_visit.symptoms }}</span></li>
-
+                        <a href="{% url 'editpatientinfo' patient_id=patient.id %}" class="btn btn-primary btn-sm" style="margin-top: 1rem;"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <a href="{% url 'patientlist' %}" class="btn btn-warning btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Return To ER List</a>
+    
                     </ul>
                 </div>
             </div>
             <div class="card" style="border: none; border-radius: 5px; margin-bottom: 1rem;">
-
+                <a href="" class="btn btn-primary btn-block"
+                    style="background-color: #FC947E; color: black; padding: 15px 72px; border: none; border-radius: 5px; font-weight: bold; font-size: 15px;">
+                    <i class="fas fa-stethoscope"></i> AI Diagnoses List
+                 </a>
             </div>
             <div class="card">
                 <div class="card-body">
