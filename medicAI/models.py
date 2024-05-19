@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -65,5 +66,7 @@ class Hospital_Visit(models.Model):
     prescription = models.CharField(max_length=200, blank=True)
     diagnosis = models.CharField(max_length=200, blank=True)
     seen_nurse = models.BooleanField(default=False)
+    er_doctor = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    symptoms = models.CharField(max_length=500, null=True, blank=True )
 
     
