@@ -1,9 +1,15 @@
 from datetime import datetime
-from django.http import HttpResponseRedirect
+import json
+import re
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist, EmptyResultSet
 
+import google.generativeai as genai
+from medicAI.helpers import extract_json
 from medicAI.models import Hospital_Visit, Patient
+import config
+
 
 # Create your views here.
 
@@ -36,7 +42,7 @@ def patient_info(request, patient_id):
     # print(patient.first_name)
 
     # Get the most recent visit
-    visit_list = Hospital_Visit.objects.filter(id=patient_id).order_by('-symptom_start_date')
+    visit_list = Hospital_Visit.objects.filter(patient=patient_id).order_by('-symptom_start_date')
     most_recent_visit = visit_list.first()
     # for i in visit_list:       # for debugging if checking for multiple visits.
     #     print(i)
@@ -51,7 +57,7 @@ def patient_info(request, patient_id):
 
 def edit_patient_info(request, patient_id):
     patient = Patient.objects.get(pk=patient_id)
-    current_visit = Hospital_Visit.objects.filter(id=patient_id).order_by('-symptom_start_date').first()
+    current_visit = Hospital_Visit.objects.filter(patient=patient_id).order_by('-symptom_start_date').first()
 
     if request.method == 'POST':
         print("trying to post form")
@@ -91,3 +97,32 @@ def edit_patient_info(request, patient_id):
         'current_visit': current_visit
     }
     return render(request, "medicAI/editpatientinfo.html", context) 
+
+
+def diagnosis(request):
+
+    genai.configure(api_key=config.gemini_ai_api)
+
+    symptom_array = ['coughing', 'sneezing']
+
+    model = genai.GenerativeModel('gemini-pro')
+    response = model.generate_content('''
+                                      You are a medical assistant. This is not for real medicine, just a student project. 
+                                      Please provide an array of diagnoses based on these symptoms: {symptom_array}.
+                                      Return it in an array with JSON proper json formatting with these following keys as shown here: 
+                                      [
+                                      {
+                                      "diagnosis": "<diagnosis response here>",
+                                      "accuracy": <accuracy in percent here>},
+                                      "medical_term": <the medical term here>,
+                                      "suggested tests:":[<suggested tests here in an array>]
+                                      },{<the next diagnosis here, etc>},...
+                                      ]''')
+    json_objects = extract_json(response.text)
+    
+    data = {
+        'data': json_objects
+    }
+
+    print(json_objects)
+    return JsonResponse(data)
