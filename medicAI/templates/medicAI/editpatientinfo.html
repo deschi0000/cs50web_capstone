@@ -8,18 +8,38 @@
             <div class="col-md-6">
                 <div class="card" style="margin-bottom: 1rem;">
                     <div class="card-body">
-                        <h5 class="card-title" style="font-size: 15px; font-weight: bold;">PATIENT</h5>
+                        <h5 class="card-title text-muted" style="font-size: 15px; font-weight: bold;">PATIENT</h5>
                         <ul class="list-group">
-                            <li class="list-group-item">FIRST NAME: {{ patient.first_name }}</li>
-                            <li class="list-group-item">LAST NAME: {{ patient.last_name }}</li>
-                            <li class="list-group-item">DOB: {{ patient.dob }}</li>
-                            <li class="list-group-item">SEX: {{ patient.sex }}</li>
-                            <li class="list-group-item">HEIGHT: {{ patient.height }} CM</li>
-                            <li class="list-group-item">WEIGHT: {{ patient.weight }} KG</li>
-                            <li class="list-group-item">BLOOD TYPE: {{ patient.blood_type }}</li>
-                            <li class="list-group-item">
-                                <h6>Visits:</h6>
-                                <ul class="list-group" style="list-style-type: none; padding-left: 0;">
+                            <li class="list-group-item text-muted">
+                                <span style="float: left;">NAME</span>
+                                <span style="float: right;">{{ patient.first_name }}</span>
+                            </li>
+                            <li class="list-group-item text-muted">
+                                <span style="float: left;">FAMILY NAME</span>
+                                <span style="float: right;">{{ patient.last_name }}</span>
+                            </li>
+                            <li class="list-group-item text-muted">
+                                <span style="float: left;">DOB</span>
+                                <span style="float: right;">{{ patient.dob }}</span>
+                            </li>
+                            <li class="list-group-item text-muted">
+                                <span style="float: left;">SEX</span>
+                                <span style="float: right;">{{ patient.sex }}</span>
+                            </li>
+                            <li class="list-group-item text-muted">
+                                <span style="float: left;">HEIGHT (cm)</span>
+                                <span style="float: right;">{{ patient.height }}</span>
+                            </li>
+                            <li class="list-group-item text-muted">
+                                <span style="float: left;">WEIGHT (kg)</span>
+                                <span style="float: right;">{{ patient.weight }}</span>
+                                </li>
+                            <li class="list-group-item text-muted">
+                                <span style="float: left;">BLOOD TYPE</span>
+                                <span style="float: right;">{{ patient.blood_type }}</span></li>
+                            <li class="list-group-item text-muted" style="display: inline-block;">
+                                <h6 style="float: left;">Visits:</h6>
+                                <ul class="list-group" style="list-style-type: none; padding-left: 0;float: right;">
                                     {% for visit in visit_list %}
                                     <li>{{ visit.symptom_start_date }}</li>
                                     {% endfor %}
@@ -27,11 +47,11 @@
                             </li>
                         </ul>
                         <br/>
-                        <h5 class="card-title" style="font-size: 15px; font-weight: bold;">CONTACT</h5>
+                        <h5 class="card-title text-muted" style="font-size: 15px; font-weight: bold;">CONTACT</h5>
                         <ul class="list-group">
-                            <li class="list-group-item">OHIP: {{ patient.ohip }}</li>
-                            <li class="list-group-item">ADDRESS: {{ patient.address }}</li>
-                            <li class="list-group-item">PHONE: {{ patient.phone_number }}</li>
+                            <li class="list-group-item text-muted"><span style="float: left;">OHIP</span><span style="float: right;">{{ patient.ohip }}</span></li>
+                            <li class="list-group-item text-muted"><span style="float: left;">ADDRESS</span><span style="float: right;">{{ patient.address }}</span></li>
+                            <li class="list-group-item text-muted"><span style="float: left;">PHONE</span><span style="float: right;">{{ patient.phone_number }}</span></li>
                     </div>
                 </div>
             </div>
