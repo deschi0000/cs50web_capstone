@@ -77,9 +77,9 @@
                                     </div>
                                 </div>
                                 <!-- <input type="date" class="form-control" value="{{ current_visit.symptom_start_date }}"> -->
-                                
-                                
                             </li>
+                            <li class="list-group-item">SYMPTOMS:<textarea class='form-control' name="symptoms">{{ current_visit.symptoms }}</textarea></li>
+                            
                             <button class="btn btn-primary btn-sm" style="margin-top: 1rem;" type="submit"><i class="fas fa-pencil-alt"></i> Update </button>     
                             <a href="{% url 'patientinfo' patient_id=patient.id %}" class="btn btn-warning btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Cancel </a>
                             
