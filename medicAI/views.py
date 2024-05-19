@@ -57,7 +57,8 @@ def patient_info(request, patient_id):
 
 def edit_patient_info(request, patient_id):
     patient = Patient.objects.get(pk=patient_id)
-    current_visit = Hospital_Visit.objects.filter(patient=patient_id).order_by('-symptom_start_date').first()
+    visit_list = Hospital_Visit.objects.filter(patient=patient_id).order_by('-symptom_start_date')
+    current_visit = visit_list.first()
 
     if request.method == 'POST':
         print("trying to post form")
@@ -96,6 +97,7 @@ def edit_patient_info(request, patient_id):
 
     context = {
         'patient': patient,
+        'visit_list' : visit_list,
         'current_visit': current_visit
     }
     return render(request, "medicAI/editpatientinfo.html", context) 
