@@ -8,16 +8,36 @@
                 <div class="card-body">
                     <h5 class="card-title" style="font-size: 15px; font-weight: bold;">PATIENT</h5>
                     <ul class="list-group">
-                        <li class="list-group-item">FIRST NAME: {{ patient.first_name }}</li>
-                        <li class="list-group-item">LAST NAME: {{ patient.last_name }}</li>
-                        <li class="list-group-item">DOB: {{ patient.dob }}</li>
-                        <li class="list-group-item">SEX: {{ patient.sex }}</li>
-                        <li class="list-group-item">HEIGHT: {{ patient.height }} CM</li>
-                        <li class="list-group-item">WEIGHT: {{ patient.weight }} KG</li>
-                        <li class="list-group-item">BLOOD TYPE: {{ patient.blood_type }}</li>
                         <li class="list-group-item">
-                            <h6>Visits:</h6>
-                            <ul class="list-group" style="list-style-type: none; padding-left: 0;">
+                            <span style="float: left;">NAME</span>
+                            <span class="text-primary" style="float: right;">{{ patient.first_name }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">FAMILY NAME</span>
+                            <span class="text-primary" style="float: right;">{{ patient.last_name }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">DOB</span>
+                            <span class="text-primary" style="float: right;">{{ patient.dob }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">SEX</span>
+                            <span class="text-primary" style="float: right;">{{ patient.sex }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">HEIGHT (cm)</span>
+                            <span class="text-primary" style="float: right;">{{ patient.height }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">WEIGHT (kg)</span>
+                            <span class="text-primary" style="float: right;">{{ patient.weight }}</span>
+                            </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">BLOOD TYPE</span>
+                            <span class="text-primary" style="float: right;">{{ patient.blood_type }}</span></li>
+                        <li class="list-group-item" style="display: inline-block;">
+                            <h6 style="float: left;">Visits:</h6>
+                            <ul class="list-group text-primary" style="list-style-type: none; padding-left: 0;float: right;">
                                 {% for visit in visit_list %}
                                 <li>{{ visit.symptom_start_date }}</li>
                                 {% endfor %}
@@ -27,9 +47,9 @@
                     <br/>
                     <h5 class="card-title" style="font-size: 15px; font-weight: bold;">CONTACT</h5>
                     <ul class="list-group">
-                        <li class="list-group-item">OHIP: {{ patient.ohip }}</li>
-                        <li class="list-group-item">ADDRESS: {{ patient.address }}</li>
-                        <li class="list-group-item">PHONE: {{ patient.phone_number }}</li>
+                        <li class="list-group-item"><span style="float: left;">OHIP</span><span class="text-primary" style="float: right;">{{ patient.ohip }}</span></li>
+                        <li class="list-group-item"><span style="float: left;">ADDRESS</span><span class="text-primary" style="float: right;">{{ patient.address }}</span></li>
+                        <li class="list-group-item"><span style="float: left;">PHONE</span><span class="text-primary" style="float: right;">{{ patient.phone_number }}</span></li>
                     <a href="{% url 'editpatientinfo' patient_id=patient.id %}" class="btn btn-primary btn-sm" style="margin-top: 1rem;"><i class="fas fa-pencil-alt"></i> Edit</a>
                     <a href="{% url 'patientlist' %}" class="btn btn-warning btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Return To ER List</a>
 
@@ -41,12 +61,12 @@
                 <div class="card-body">
                     <h5 class="card-title" style="font-size: 15px; font-weight: bold;">AI DIAGNOSES</h5>
                     <ul class="list-group">
-                        <li class="list-group-item">ACUITY: {{ current_visit.acuity }}</li>
-                        <li class="list-group-item">TEMPERATURE: {{ current_visit.temperature }} C</li>
-                        <li class="list-group-item">HEART RATE: {{ current_visit.heart_rate }} BPM</li>
-                        <li class="list-group-item">SEEN NURSE: {{ current_visit.seen_nurse }} </li>
-                        <li class="list-group-item">SYMPTOM START: {{ current_visit.symptom_start_date }}</li>
-                        <li class="list-group-item">SYMPTOMS: {{ current_visit.symptoms }}</li>
+                        <li class="list-group-item">ACUITY &emsp;<span class="text-primary">{{ current_visit.acuity }}</span></li>
+                        <li class="list-group-item">TEMPERATURE &emsp;<span class="text-primary">{{ current_visit.temperature }}</span></li>
+                        <li class="list-group-item">HEART RATE &emsp;<span class="text-primary">{{ current_visit.heart_rate }}</span></li>
+                        <li class="list-group-item">SEEN NURSE &emsp;<span class="text-primary">{{ current_visit.seen_nurse }}</span> </li>
+                        <li class="list-group-item">SYMPTOM START &emsp;<span class="text-primary">{{ current_visit.symptom_start_date }}</span></li>
+                        <li class="list-group-item">SYMPTOMS &emsp;<span class="text-primary">{{ current_visit.symptoms }}</span></li>
 
                     </ul>
                 </div>

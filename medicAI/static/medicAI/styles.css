@@ -4,3 +4,14 @@
     background-color: #E8E5E4;
     /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); */
 }
+
+
+
+.display-text {
+    color: grey;
+    font-weight: 400;
+}
+
+.list-group-item {
+    display: inline-block;
+}
