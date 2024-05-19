@@ -36,7 +36,11 @@
             <tr>
                 <td>{{ visit.id }}</td>
                 <td>{{ visit.patient.last_name }}, {{ visit.patient.first_name }}</td>
-                <td></td>
+                <td>
+                    {% if visit.symptoms %}
+                        {{ visit.symptoms }}
+                    {% endif %}                        
+                </td>
                 <td>{{visit.acuity}}</td>
                 <td>{{visit.seen_nurse}}</td>
                 <td class=" text-left">
