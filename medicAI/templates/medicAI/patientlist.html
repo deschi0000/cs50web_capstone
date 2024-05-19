@@ -24,19 +24,17 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <td class="col">ID</td>
                     <td class="col">Name</td>
-                    <td class="col">Symptoms</td>
+                    <td class="col disable-col">Symptoms</td>
                     <td class="col">Acuity</td>
                     <td class="col">Prepped</td>
-                    <td class="col">Edit</td>
+                    <td class="col"></td>
                 </tr>
             </thead>
             {% for visit in hospital_visits %}
             <tr>
-                <td>{{ visit.id }}</td>
                 <td>{{ visit.patient.last_name }}, {{ visit.patient.first_name }}</td>
-                <td>
+                <td class="disable-col">
                     {% if visit.symptoms %}
                         {{ visit.symptoms }}
                     {% endif %}                        
