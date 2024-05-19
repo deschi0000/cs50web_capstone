@@ -69,6 +69,7 @@ def edit_patient_info(request, patient_id):
         symptom_start = request.POST.get('symptom_start')
         doctor_diagnosis = request.POST.get('diagnosis')
         prescription = request.POST.get('prescription')
+        symptoms = request.POST.get('symptoms')
 
         seen_nurse = request.POST.get('seen_nurse') # Convert from str to bool
         if seen_nurse.lower() == 'true':
@@ -88,6 +89,7 @@ def edit_patient_info(request, patient_id):
         current_visit.diagnosis = doctor_diagnosis
         current_visit.prescription = prescription
         current_visit.seen_nurse = seen_nurse
+        current_visit.symptoms = symptoms
         current_visit.save()
 
         return HttpResponseRedirect(f"/patientinfo/{patient_id}")
