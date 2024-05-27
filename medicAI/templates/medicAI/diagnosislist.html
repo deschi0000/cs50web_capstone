@@ -3,13 +3,13 @@
 {% block body %}
 
 
-<div class="container" style="margin-top: 1rem; margin-bottom: 3rem; width: 50%;">
+<div class="container" id="diagnosis-list">
     <div class="list-group">
         {% for diagnosis in data %}
             <a href="#" class="list-group-item list-group-item-action" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ diagnosis.diagnosis }}</h5>
-                    <small>{{ diagnosis.accuracy }} %</small>
+                    <small><b>{{ diagnosis.accuracy }} %</b></small>
                 </div>
                 <small>{{ diagnosis.medical_term }}</small>
                 <p class="mb-1">
