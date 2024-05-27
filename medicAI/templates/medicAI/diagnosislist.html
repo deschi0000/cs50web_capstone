@@ -15,7 +15,11 @@
                 <p class="mb-1">
                     <ul>
                         {% for item in diagnosis.suggested_tests%}
-                            <li>{{ item }}</li>
+                            {% if item %}
+                                <li>{{ item }}</li>
+                            {% else %}
+                                <li>No Tests Available</li>
+                            {% endif %} 
                         {% endfor %}
                     </ul>
                 </p>
@@ -24,5 +28,6 @@
       </div>
 </div>
 
+<button class="my-button">Click me</button>
 
   {% endblock %}
