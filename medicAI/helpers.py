@@ -1,7 +1,6 @@
 import json
 import re
 
-
 def extract_json(text_response):
     # This pattern matches a string that starts with '{' and ends with '}'
     pattern = r'\{[^{}]*\}'
