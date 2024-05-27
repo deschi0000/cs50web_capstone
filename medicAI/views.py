@@ -159,3 +159,15 @@ def diagnosis(request, patient_id):
     # return JsonResponse(data)
 
     return render(request, "medicAI/diagnosislist.html", data) 
+
+
+
+def add_test(request):
+    if request.method == 'POST':
+        test = request.POST.get('test')
+        print("======================================")
+        print(test)
+        print("======================================")
+        return JsonResponse({'message': 'Test added successfully'})
+    else:
+        return JsonResponse({'message': 'no test added successfully'})
