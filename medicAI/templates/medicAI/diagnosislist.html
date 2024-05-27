@@ -15,17 +15,18 @@
                 <p class="mb-1">
                     <ul>
                         {% for item in diagnosis.suggested_tests%}
-                            {% if item %}
-                                <li>{{ item }}</li>
-                            {% else %}
-                                <li>No Tests Available</li>
-                            {% endif %} 
+                            <li>{{ item }}</li>
                         {% endfor %}
                     </ul>
                 </p>
             </a>
         {% endfor %}
-      </div>
+        <a class="nav-link link-light" href="{% url 'patientinfo' patient_id=patient_id %}">
+            <button type="button" class="btn btn-primary">Return to Patient
+                <i class="fa-solid fa-notes-medical"></i>
+            </button>
+        </a>
+    </div>
 </div>
 
 <button class="my-button">Click me</button>
