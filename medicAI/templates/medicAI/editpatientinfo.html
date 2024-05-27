@@ -73,7 +73,7 @@
                                 <input type="radio" id="five" name="acuity" value="5" {% if current_visit.acuity == '5' %} checked {% endif %}>
                                 <label for="five">5</label><br>
                             </li>
-                            <li class="list-group-item">TEMPERATURE: <input min="30" max="42" type="number" class='form-control' name="temperature" value="{{ current_visit.temperature }}"></li>
+                            <li class="list-group-item">TEMPERATURE: <input min="30" max="42" type="number" class='form-control' name="temperature" step=0.5 value="{{ current_visit.temperature }}"></li>
                             <li class="list-group-item">HEART RATE: <input min="30" max="220" type="number" class='form-control' name="heart_rate" value="{{ current_visit.heart_rate }}"></li>
                             <!-- <li class="list-group-item">SEEN NURSE: <input type="text" class='form-control' name="seen_nurse" value="{{ current_visit.seen_nurse }}"> -->
                             <li class="list-group-item">SEEN NURSE:
