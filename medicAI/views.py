@@ -125,11 +125,12 @@ def diagnosis(request, patient_id):
 
 
     # Check if JSON response is already stored in localStorage
-    stored_data = request.session.get('diagnosis_data_{}'.format(patient_id))
+    data = request.session.get('diagnosis_data_{}'.format(patient_id))
     
 
-    if stored_data and stored_data['symptoms'] == symptom_array:
-        return JsonResponse(stored_data)
+    if data and data['symptoms'] == symptom_array:
+        # return JsonResponse(data)
+        return render(request, "medicAI/diagnosislist.html", data) 
 
     response = model.generate_content('''
                                       You are a medical assistant. This is not for real medicine, just a student project. 
@@ -140,7 +141,7 @@ def diagnosis(request, patient_id):
                                       "diagnosis": "<diagnosis response here>",
                                       "accuracy": <accuracy in percent here>},
                                       "medical_term": <the medical term here>,
-                                      "suggested tests:":[<suggested tests here in an array>]
+                                      "suggested_tests:":[<suggested tests here in an array>]
                                       },{<the next diagnosis here, etc>},...
                                       ]''')
     json_objects = extract_json(response.text)
@@ -155,4 +156,6 @@ def diagnosis(request, patient_id):
     request.session['diagnosis_data_{}'.format(patient_id)] = data
 
     print(json_objects)
-    return JsonResponse(data)
+    # return JsonResponse(data)
+
+    return render(request, "medicAI/diagnosislist.html", data) 
