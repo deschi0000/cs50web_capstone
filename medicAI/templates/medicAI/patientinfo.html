@@ -59,12 +59,31 @@
                 <div class="card-body">
                     <h5 class="card-title" style="font-size: 15px; font-weight: bold;">AI DIAGNOSES</h5>
                     <ul class="list-group">
-                        <li class="list-group-item">ACUITY &emsp;<span class="text-primary">{{ current_visit.acuity }}</span></li>
-                        <li class="list-group-item">TEMPERATURE &emsp;<span class="text-primary">{{ current_visit.temperature }}</span></li>
-                        <li class="list-group-item">HEART RATE &emsp;<span class="text-primary">{{ current_visit.heart_rate }}</span></li>
-                        <li class="list-group-item">SEEN NURSE &emsp;<span class="text-primary">{{ current_visit.seen_nurse }}</span> </li>
-                        <li class="list-group-item">SYMPTOM START &emsp;<span class="text-primary">{{ current_visit.symptom_start_date }}</span></li>
-                        <li class="list-group-item">SYMPTOMS &emsp;<span class="text-primary">{{ current_visit.symptoms }}</span></li>
+                        <li class="list-group-item">
+                            <span style="float: left;">ACUITY</span>
+                            <span class="text-primary" style="float: right;">{{ current_visit.acuity }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">TEMPERATURE</span>
+                            <span class="text-primary" style="float: right;">{{ current_visit.temperature }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">HEART RATE</span>
+                            <span class="text-primary" style="float: right;">{{ current_visit.heart_rate }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">SEEN NURSE</span>
+                            <span class="text-primary" style="float: right;">{{ current_visit.seen_nurse }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">SYMPTOM START</span>
+                            <span class="text-primary" style="float: right;">{{ current_visit.symptom_start_date }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span style="float: left;">SYMPTOMS</span>
+                            <span class="text-primary" style="float: right;">{{ current_visit.symptoms }}</span>
+                        </li>
+                        
                         <a href="{% url 'editpatientinfo' patient_id=patient.id %}" class="btn btn-primary btn-sm" style="margin-top: 1rem;"><i class="fas fa-pencil-alt"></i> Edit</a>
                         <a href="{% url 'patientlist' %}" class="btn btn-warning btn-sm" style="margin-top: 1rem;"><i class="fas fa-chevron-left"></i> Return To ER List</a>
     
@@ -72,10 +91,10 @@
                 </div>
             </div>
             <div class="card" style="border: none; border-radius: 5px; margin-bottom: 1rem;">
-                <a href="" class="btn btn-primary btn-block"
+                <a href="{% url 'diagnosis' patient_id=patient.id %}" class="btn btn-primary btn-block"
                     style="background-color: #FC947E; color: black; padding: 15px 72px; border: none; border-radius: 5px; font-weight: bold; font-size: 15px;">
                     <i class="fas fa-stethoscope"></i> AI Diagnoses List
-                 </a>
+                </a>
             </div>
             <div class="card">
                 <div class="card-body">
