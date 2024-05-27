@@ -103,13 +103,34 @@ def edit_patient_info(request, patient_id):
     return render(request, "medicAI/editpatientinfo.html", context) 
 
 
-def diagnosis(request):
+def diagnosis(request, patient_id):
 
+    # Get Gemini
     genai.configure(api_key=config.gemini_ai_api)
-
-    symptom_array = ['coughing', 'sneezing']
-
     model = genai.GenerativeModel('gemini-pro')
+
+
+    # Retrieve the symptoms from this visit
+    visit_list = Hospital_Visit.objects.filter(patient=patient_id).order_by('-symptom_start_date')
+    current_visit = visit_list.first()
+
+    print("SYMPTOMS:")
+    print("=========================================")
+    print(current_visit.symptoms.split(', '))
+    symptom_array = current_visit.symptoms.split(', ')
+    print("=========================================")
+
+
+    # symptom_array = ['coughing', 'sneezing']
+
+
+    # Check if JSON response is already stored in localStorage
+    stored_data = request.session.get('diagnosis_data_{}'.format(patient_id))
+    
+
+    if stored_data and stored_data['symptoms'] == symptom_array:
+        return JsonResponse(stored_data)
+
     response = model.generate_content('''
                                       You are a medical assistant. This is not for real medicine, just a student project. 
                                       Please provide an array of diagnoses based on these symptoms: {symptom_array}.
@@ -125,8 +146,13 @@ def diagnosis(request):
     json_objects = extract_json(response.text)
     
     data = {
+        'patient_id': patient_id,
+        'symptoms': symptom_array,
         'data': json_objects
     }
+
+    # Store JSON response in session (localStorage)
+    request.session['diagnosis_data_{}'.format(patient_id)] = data
 
     print(json_objects)
     return JsonResponse(data)
