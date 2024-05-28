@@ -5,8 +5,14 @@ $(document).ready(function() {
         $(this).find(".panel").slideToggle("slow");
     });
 
+    // Prevent the panel from closing when clicking on links inside the panel
+    $(".panel a").click(function(event){
+        event.stopPropagation(); // Prevent event bubbling
+    });
 
-    $('.my-button').click(function() {
+
+    $('.test-item').click(function() {
+        event.stopPropagation();
         console.log("clicking buttons");
         var test = "heyo"; // Get the text of the clicked li
         // Send the test data to the backend
@@ -14,7 +20,7 @@ $(document).ready(function() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken') // Assuming you have a function to get CSRF token
+                'X-CSRFToken': getCookie('csrftoken')
             },
             body: JSON.stringify({
                 'test': test
@@ -29,12 +35,26 @@ $(document).ready(function() {
         .then(data => {
             // Handle success response if needed
             console.log('Test added to backend:', test);
+            showNotification("added!");
         })
         .catch(error => {
             // Handle error response if needed
             console.error('Error:', error);
         });
     });
+    // Function to show notification bar
+    function showNotification(message) {
+        
+        var notificationBar = $('alert').text(message);
+        notificationBar.show();
+
+        // After 3 seconds, fade out and remove the notification bar
+        setTimeout(function() {
+            notificationBar.fadeOut('slow', function() {
+                $(this).remove();
+            });
+        }, 3000);
+    }
 });
 
 // Function to get CSRF token
@@ -53,3 +73,4 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
