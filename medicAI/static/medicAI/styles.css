@@ -20,6 +20,17 @@
     margin-bottom: 3rem;
 }
 
+.panel {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: solid 1px #ccc;
+    display: none;
+}
+
+.test-item:hover {
+    color: red;
+}
+
 /* Remove symptom column for phone size */
 @media only screen and (max-width: 450px) {
     .disable-col {
