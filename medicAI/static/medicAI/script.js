@@ -1,5 +1,11 @@
 $(document).ready(function() {
     console.log("jello")
+
+    $(".list-group-item-action").click(function(){
+        $(this).find(".panel").slideToggle("slow");
+    });
+
+
     $('.my-button').click(function() {
         console.log("clicking buttons");
         var test = "heyo"; // Get the text of the clicked li
