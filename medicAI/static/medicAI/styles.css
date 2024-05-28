@@ -28,7 +28,7 @@
 }
 
 .test-item:hover {
-    color: red;
+    color: grey;
 }
 
 /* Remove symptom column for phone size */
