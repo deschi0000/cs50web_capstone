@@ -12,6 +12,36 @@
                     <small><b>{{ diagnosis.accuracy }} %</b></small>
                 </div>
                 <small>{{ diagnosis.medical_term }}</small>
+                <div class="panel">
+                    <p class="mb-1">
+                        <ul style="list-style-type: none; padding: 0; margin: 0;">
+                            {% for item in diagnosis.suggested_tests%}
+                            <li class="test-item"><i class="fa-solid fa-plus"></i>   {{ item }}</li>
+                                <!-- <button class="my-button">Click me</button> -->
+                            {% endfor %}
+                        </ul>
+                    </p>
+                </div>
+            </a>
+        {% endfor %}
+        <a class="nav-link link-light" href="{% url 'patientinfo' patient_id=patient_id %}">
+            <button type="button" class="btn btn-primary">Return to Patient
+                <i class="fa-solid fa-notes-medical"></i>
+            </button>
+        </a>
+      </div>
+</div>
+
+
+<!-- <div class="container" id="diagnosis-list">
+    <div class="list-group">
+        {% for diagnosis in data %}
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ diagnosis.diagnosis }}</h5>
+                    <small><b>{{ diagnosis.accuracy }} %</b></small>
+                </div>
+                <small>{{ diagnosis.medical_term }}</small>
                 <p class="mb-1">
                     <ul>
                         {% for item in diagnosis.suggested_tests%}
@@ -26,8 +56,8 @@
                 <i class="fa-solid fa-notes-medical"></i>
             </button>
         </a>
-    </div>
-</div>
+      </div>
+</div> -->
 
 <button class="my-button">Click me</button>
 
