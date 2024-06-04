@@ -31,6 +31,10 @@
     color: grey;
 }
 
+.clicked {
+    color: rgb(203, 203, 203);
+}
+
 /* Remove symptom column for phone size */
 @media only screen and (max-width: 450px) {
     .disable-col {
