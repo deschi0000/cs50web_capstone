@@ -11,10 +11,11 @@ $(document).ready(function() {
     });
 
 
-    $('.test-item').click(function() {
+    $('.test-item').click(function(e) {
         event.stopPropagation();
         console.log("clicking buttons");
-        var test = "heyo"; // Get the text of the clicked li
+        // var test = "heyo"; // Get the text of the clicked li
+        var test = e.target.innerText;
         // Send the test data to the backend
         fetch('/add-test/', {
             method: 'POST',
@@ -30,12 +31,36 @@ $(document).ready(function() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+
+            // Toggle the clicked class
+            if (!$(e.target).hasClass("clicked")) {
+                // Add CSS class to change color
+                $(e.target).addClass("clicked");
+            } else {
+                $(e.target).toggleClass("clicked");
+            }
+
+            // Toggle the plus/minus icon
+            if ($(e.target).find('i.fa-solid').hasClass('fa-plus')) {
+                $(e.target).find('i.fa-solid').removeClass('fa-plus').addClass('fa-minus');
+            } else {
+                $(e.target).find('i.fa-solid').removeClass('fa-minus').addClass('fa-plus');
+            }
+
             return response.json();
         })
         .then(data => {
             // Handle success response if needed
             console.log('Test added to backend:', test);
             showNotification("added!");
+
+            console.log("changing class!")
+
+            // $(e.target).toggleClass("clicked");
+            // if (!$(e.target).hasClass("clicked")) {
+            //     // Add CSS class to change color
+            //     $(e.target).addClass("clicked");
+            // }
         })
         .catch(error => {
             // Handle error response if needed
