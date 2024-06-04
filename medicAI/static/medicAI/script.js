@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    console.log("jello")
+    // console.log("jello");
 
     $(".list-group-item-action").click(function(){
         $(this).find(".panel").slideToggle("slow");
@@ -13,7 +13,8 @@ $(document).ready(function() {
 
     $('.test-item').click(function(e) {
         event.stopPropagation();
-        console.log("clicking buttons");
+        // console.log("clicking buttons");
+
         // var test = "heyo"; // Get the text of the clicked li
         var test = e.target.innerText;
         // Send the test data to the backend
@@ -43,18 +44,21 @@ $(document).ready(function() {
             // Toggle the plus/minus icon
             if ($(e.target).find('i.fa-solid').hasClass('fa-plus')) {
                 $(e.target).find('i.fa-solid').removeClass('fa-plus').addClass('fa-minus');
+                showNotification("Test added");
             } else {
                 $(e.target).find('i.fa-solid').removeClass('fa-minus').addClass('fa-plus');
+                showNotification("Test removed");
             }
 
             return response.json();
         })
         .then(data => {
             // Handle success response if needed
-            console.log('Test added to backend:', test);
-            showNotification("added!");
 
-            console.log("changing class!")
+
+            // console.log('Test added to backend:', test);
+            // console.log("changing class!");
+
 
             // $(e.target).toggleClass("clicked");
             // if (!$(e.target).hasClass("clicked")) {
@@ -69,16 +73,14 @@ $(document).ready(function() {
     });
     // Function to show notification bar
     function showNotification(message) {
-        
-        var notificationBar = $('alert').text(message);
-        notificationBar.show();
+        console.log("trying to show notification!");
+        var notificationBar = $('.alert').text(message);
+        notificationBar.removeAttr('hidden'); // Remove the 'hidden' attribute
 
         // After 3 seconds, fade out and remove the notification bar
         setTimeout(function() {
-            notificationBar.fadeOut('slow', function() {
-                $(this).remove();
-            });
-        }, 3000);
+            notificationBar.attr('hidden', true); // Add the 'hidden' attribute back
+        }, 2000);
     }
 });
 
