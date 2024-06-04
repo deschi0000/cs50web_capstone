@@ -164,10 +164,10 @@ def diagnosis(request, patient_id):
 
 def add_test(request):
     if request.method == 'POST':
-        test = request.POST.get('test')
-        print("======================================")
-        print(test)
-        print("======================================")
+        data = json.loads(request.body)
+        print("=================================")
+        print(data.get('test'))
+        print("=================================")
         return JsonResponse({'message': 'Test added successfully'})
     else:
         return JsonResponse({'message': 'no test added successfully'})
