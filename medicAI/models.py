@@ -41,6 +41,9 @@ class Patient(models.Model):
         blank=True
     )
 
+    def __str__(self):
+        return f'ID: {self.id} | {self.first_name} {self.last_name}'
+
 
 class Hospital_Visit(models.Model):
 
@@ -67,6 +70,18 @@ class Hospital_Visit(models.Model):
     diagnosis = models.CharField(max_length=200, blank=True)
     seen_nurse = models.BooleanField(default=False)
     er_doctor = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    symptoms = models.CharField(max_length=500, null=True, blank=True )
+    symptoms = models.CharField(max_length=500, null=True, blank=True)
 
+    def __str__(self):
+        return f'Patient: {self.patient} | Date: {self.symptom_start_date}'
+
+
+class Medical_Test(models.Model):
+    hostpital_visit = models.ForeignKey(Hospital_Visit, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now, blank=False)
+    test_name = models.CharField(max_length=200, null=False, blank=False)
+    test_notes = models.CharField(max_length=500, null=True, blank=True)
+
+    def __str__(self):
+        return f'Test: {self.test_name}' 
     
