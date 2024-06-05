@@ -77,7 +77,7 @@ class Hospital_Visit(models.Model):
 
 
 class Medical_Test(models.Model):
-    hostpital_visit = models.ForeignKey(Hospital_Visit, on_delete=models.CASCADE)
+    hospital_visit = models.ForeignKey(Hospital_Visit, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now, blank=False)
     test_name = models.CharField(max_length=200, null=False, blank=False)
     test_notes = models.CharField(max_length=500, null=True, blank=True)
