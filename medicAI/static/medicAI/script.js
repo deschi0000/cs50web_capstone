@@ -33,6 +33,14 @@ $(document).ready(function() {
                 throw new Error('Network response was not ok');
             }
 
+
+
+            return response.json();
+        })
+        .then(data => {
+            // Handle success response if needed
+            console.log("I have a reponse!");
+            console.log(data);
             // Toggle the clicked class
             if (!$(e.target).hasClass("clicked")) {
                 // Add CSS class to change color
@@ -49,13 +57,6 @@ $(document).ready(function() {
                 $(e.target).find('i.fa-solid').removeClass('fa-minus').addClass('fa-plus');
                 showNotification("Test removed");
             }
-
-            return response.json();
-        })
-        .then(data => {
-            // Handle success response if needed
-
-
             // console.log('Test added to backend:', test);
             // console.log("changing class!");
 
