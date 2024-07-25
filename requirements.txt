@@ -1,6 +1,7 @@
 django-boostrap-v5
 fontawesome
 
+pip install google-generativeai
 
 Requirements
 
