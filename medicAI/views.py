@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist, EmptyResultSet
 
 import google.generativeai as genai
 from medicAI.helpers import extract_json
-from medicAI.models import Hospital_Visit, Patient
+from medicAI.models import Hospital_Visit, Patient, Medical_Test
 import config
 
 
@@ -47,10 +47,24 @@ def patient_info(request, patient_id):
     # for i in visit_list:       # for debugging if checking for multiple visits.
     #     print(i)
 
+    # Get patient test list for the visit:
+    test = Medical_Test.objects.first()
+    print("ID======")
+    print(test)
+    print(test.date)
+    print(test.id)
+
+    # Recieve the appropriate tests for the hostipal visit / patient
+    tests = Medical_Test.objects.filter(pk=patient.id)
+    print(tests)
+
+
+
     context= {
         'patient': patient,
         'visit_list' : visit_list,
-        'current_visit': most_recent_visit
+        'current_visit': most_recent_visit,
+        'tests': tests
     }
 
     return render(request, "medicAI/patientinfo.html", context)
@@ -168,6 +182,7 @@ def add_test(request):
         print("=================================")
         print(data.get('test'))
         print("=================================")
+
         return JsonResponse({'message': 'Test added successfully'})
     else:
         return JsonResponse({'message': 'no test added successfully'})
