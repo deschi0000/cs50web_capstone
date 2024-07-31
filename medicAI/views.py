@@ -47,18 +47,13 @@ def patient_info(request, patient_id):
     # for i in visit_list:       # for debugging if checking for multiple visits.
     #     print(i)
 
-    # Get patient test list for the visit:
-    test = Medical_Test.objects.first()
-    print("ID======")
-    print(test)
-    print(test.date)
-    print(test.id)
-
     # Recieve the appropriate tests for the hostipal visit / patient
     tests = Medical_Test.objects.filter(pk=patient.id)
-    print(tests)
+    # print(tests)
 
-
+    # Set a current patient so that the ID can be pulled when adding tests
+    # (this will get reset by navigating throught the corres. urls...)
+    current_patient = request.session['current_patient'] = patient_id
 
     context= {
         'patient': patient,
@@ -181,7 +176,13 @@ def add_test(request):
         data = json.loads(request.body)
         print("=================================")
         print(data.get('test'))
+        print(data)
         print("=================================")
+
+        # Get the id set in the patient view page,
+        # ...this is to allow appropriate setting of the test.
+        id = request.session.get('current_patient')
+        print(f"current patient id: {id}")
 
         return JsonResponse({'message': 'Test added successfully'})
     else:
