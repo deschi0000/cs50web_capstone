@@ -179,11 +179,32 @@ def add_test(request):
         print(data)
         print("=================================")
 
-        # Get the id set in the patient view page,
-        # ...this is to allow appropriate setting of the test.
-        id = request.session.get('current_patient')
+        test_name = data.get('test')
+        current_patient_id = request.session.get('current_patient')
         print(f"current patient id: {id}")
 
-        return JsonResponse({'message': 'Test added successfully'})
+        # get the hospital visit queryset
+        current_hospital_visit = Hospital_Visit.objects.filter(patient=current_patient_id).first()
+        print("current visit:")
+        print(current_hospital_visit)
+
+        # check to see if the medical test is in the db
+        test_in_db = Medical_Test.objects.filter(hospital_visit=current_hospital_visit)
+        test_in_db.filter(test_name = test_name)
+
+
+        if test_in_db:
+            print("Yes it is, removing it")
+            test_in_db.delete()
+
+        else:
+            print("test not yet in DB, putting it in")
+            test_to_add = Medical_Test(
+            hospital_visit=current_hospital_visit,
+            test_name=test_name
+            )
+            test_to_add.save()
+
+        return JsonResponse({'message': 'Test modified successfully'})
     else:
         return JsonResponse({'message': 'no test added successfully'})
