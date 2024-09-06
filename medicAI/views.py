@@ -48,7 +48,7 @@ def patient_info(request, patient_id):
     #     print(i)
 
     # Recieve the appropriate tests for the hostipal visit / patient
-    tests = Medical_Test.objects.filter(pk=patient.id)
+    tests = Medical_Test.objects.filter(hospital_visit=most_recent_visit)
     # print(tests)
 
     # Set a current patient so that the ID can be pulled when adding tests
