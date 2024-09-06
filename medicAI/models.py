@@ -83,5 +83,5 @@ class Medical_Test(models.Model):
     test_notes = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return f'Test: {self.test_name}' 
+        return f'{self.test_name}' 
     
