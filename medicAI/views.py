@@ -68,6 +68,8 @@ def edit_patient_info(request, patient_id):
     patient = Patient.objects.get(pk=patient_id)
     visit_list = Hospital_Visit.objects.filter(patient=patient_id).order_by('-symptom_start_date')
     current_visit = visit_list.first()
+    tests = Medical_Test.objects.filter(hospital_visit=current_visit)
+
 
     if request.method == 'POST':
         print("trying to post form")
@@ -107,7 +109,8 @@ def edit_patient_info(request, patient_id):
     context = {
         'patient': patient,
         'visit_list' : visit_list,
-        'current_visit': current_visit
+        'current_visit': current_visit,
+        'tests': tests
     }
     return render(request, "medicAI/editpatientinfo.html", context) 
 
@@ -174,10 +177,10 @@ def diagnosis(request, patient_id):
 def add_test(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print("=================================")
-        print(data.get('test'))
-        print(data)
-        print("=================================")
+        # print("=================================")
+        # # print(data.get('test'))
+        # # print(data)
+        # print("=================================")
 
         test_name = data.get('test')
         current_patient_id = request.session.get('current_patient')
@@ -190,7 +193,11 @@ def add_test(request):
 
         # check to see if the medical test is in the db
         test_in_db = Medical_Test.objects.filter(hospital_visit=current_hospital_visit)
-        test_in_db.filter(test_name = test_name)
+        test_in_db = test_in_db.filter(test_name = test_name).first()
+        print("=================================")
+        print("---IN THE DB")
+        print(test_in_db)
+        print("=================================")
 
 
         if test_in_db:
