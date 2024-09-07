@@ -125,25 +125,49 @@ def diagnosis(request, patient_id):
     # Retrieve the symptoms from this visit
     visit_list = Hospital_Visit.objects.filter(patient=patient_id).order_by('-symptom_start_date')
     current_visit = visit_list.first()
+    tests_in_db = Medical_Test.objects.filter(hospital_visit=current_visit)
+    tests_in_db = [i.test_name.strip() for i in tests_in_db]
+    # print("THESE TESTS FOR PATIENT:")
+    # print(tests_in_db)
 
-    print("SYMPTOMS:")
-    print("=========================================")
-    print(current_visit.symptoms.split(', '))
+    # print("SYMPTOMS:")
+    # print("=========================================")
+    # print(current_visit.symptoms.split(', '))
     symptom_array = current_visit.symptoms.split(', ')
-    print("=========================================")
+    # print("=========================================")
 
-
-    # symptom_array = ['coughing', 'sneezing']
 
 
     # Check if JSON response is already stored in localStorage
     data = request.session.get('diagnosis_data_{}'.format(patient_id))
     
+    # # Get the suggested test list
+    # suggested_test_list = [i['suggested_tests'] for i in data['data']]
+    # # flatten out the array of arrays
+    # flat_list = [item for sublist in suggested_test_list for item in sublist]
+    # data['flat_list'] = flat_list
+
 
     if data and data['symptoms'] == symptom_array:
         # return JsonResponse(data)
-        return render(request, "medicAI/diagnosislist.html", data) 
+        # Add the tests already in the system
+        # Compare this set to the list and list any minuses for the tests that can be removed
+        data['tests_in_db'] = tests_in_db
+        # stored_data['tests_in_system'] = list(tests_in_db.values_list('test_name', flat=True))
+        
+        # Get the suggested tests out of the data list into an array
 
+
+        # print("THESE TESTS FOR PATIENT:")
+        # print(stored_data['tests_in_system'])
+        print("=============================================")
+
+        print(tests_in_db)
+        print("=============================================")
+
+
+        return render(request, "medicAI/diagnosislist.html", data) 
+    
     response = model.generate_content('''
                                       You are a medical assistant. This is not for real medicine, just a student project. 
                                       Please provide an array of diagnoses based on these symptoms: {symptom_array}.
@@ -161,7 +185,9 @@ def diagnosis(request, patient_id):
     data = {
         'patient_id': patient_id,
         'symptoms': symptom_array,
-        'data': json_objects
+        'data': json_objects,
+        'tests_in_db': tests_in_db,
+        # 'flat_list': flat_list
     }
 
     # Store JSON response in session (localStorage)
