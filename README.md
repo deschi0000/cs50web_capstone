@@ -15,16 +15,24 @@ OpenAI capability was used to elaborate on any suggested diagnoses, providing an
 
 The rest of the application utilized the user model (medical professional), making sure to hide sensitive patient data from anyone not authorized to use the system. In lew of registering, the assumption for this application is that the system administrator of the hospital has added authorized personal into the system.
 
+### Contained in each file
 
+views.py - The controller logic for rendering the different pages of the progam to the user in the view.
+
+helpers.py - Helper functions dedicated to parsing the Json return objects used with the Gemini integration.
+
+script.js - Using JS to get cookies/CSRF tokens, show notifications and impleement some Jquery to UI design (specifically adding and removing tests from the AI-diagnosis section).
+
+styles.css - While bootstrap takes care of most of the look, this file focuses mainly on mobile responsiveness.
 
 ### Distinctiveness
 
-This project is distintive in that it serves as a tool to aid ER medical staff in making decisions based on their patients. Aside from mostly pure CSS in the previous projects, this applicaiton makes bootstrap and the fontawesome libraries to help make the site more user-friendly and mobile responsive. 
+This project is distintive in that it serves as a tool to aid ER medical staff in making decisions based on their patients. This project utilizes bootstrap and the fontawesome libraries to help make the site more user-friendly and mobile responsive, a departure of the mostly css projects throughout the course. The distinctive feature implementd in this project is the Gemini API, which uses their AI to assist the medical user in making and/or prioritizing tests of the patients in the system. 
 
 
 ### Complexity
 
-The medical API used in this project is different from others I've used in the past in that it requires to load a time-sensitive token when making calls. Finding out the correct implementation and understanding how to properly utlize it in this project was a challenge. Also making use of the OpenAI developer tools, finding a way to prompt an explanation for certain daignoses being registered was interesting.
+Finding a way to consistenly query and parse data brought back through the Gemini API required specialized helper functions to get the job done. The schemas for the database (in this case patients, medical tests, hospital visits, etc.) provided their own challenge in understanding the levels of normalization required to consistenly store and retrieve data, requiring the reworking of my databasee a few times.
 
 ### Tech Stack
 
