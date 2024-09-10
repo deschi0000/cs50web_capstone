@@ -117,7 +117,12 @@
                         <ul class="list-group">
                             <h5 class="card-title" style="font-size: 15px; font-weight: bold; margin-top: 1rem;">TESTS</h5>
                             {% for test in tests %}
-                                <li class="list-group-item">{{ test.test_name }}<button class="btn btn-primary btn-sm" style="margin-top: 1rem;" type="submit"><i class="fa-solid fa-trash"></i></button></li>
+                                <li class="list-group-item">{{ test.test_name }}
+                                    <button type="button" class="btn btn-primary btn-sm test-delete">
+                                        <i class="fa-solid fa-trash test-delete"></i>
+                                    </button>
+                                </li>
+                                <!-- <button class="btn btn-primary btn-sm test-delete" style="margin-top: 1rem;"><i class="fa-solid fa-trash"></i></button></li> -->
                             {% endfor %}
                         </ul>
                     </div>
