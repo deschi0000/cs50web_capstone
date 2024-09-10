@@ -198,16 +198,44 @@ def diagnosis(request, patient_id):
 
     return render(request, "medicAI/diagnosislist.html", data) 
 
+def delete_test_edit_page(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print("getting it here on the backend!!===================")
+        
+        test_name = data.get('test')
+        test_name = test_name.strip()
+        test_name = " " + test_name
+        print("the test:")
+        print(test_name)
+        current_patient_id = request.session.get('current_patient')
+        current_hospital_visit = Hospital_Visit.objects.filter(patient=current_patient_id).first()
+        print(current_hospital_visit)
+        
+        test_in_db = Medical_Test.objects.filter(hospital_visit=current_hospital_visit)
+        print("WHAT IS TEST_IN_DB??0")
+        print(test_in_db)
+        test_in_db = test_in_db.filter(test_name = test_name).first()
+        
+
+        print("WHAT IS TEST_IN_DB??1")
+        print(test_in_db)
+        if test_in_db:
+            # TODO - Right now it will delete it with the fetch, 
+            # but the data will not persist in the database~~~
+            test_in_db.delete()
+            return JsonResponse({'message': 'Test removed successfully'})
+        else:
+             return JsonResponse({'message': 'test not in the databse'})
+    else:
+        return JsonResponse({'message': 'test not removed successfully'})
 
 
 def add_test(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        # print("=================================")
-        # # print(data.get('test'))
-        # # print(data)
-        # print("=================================")
 
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
         test_name = data.get('test')
         current_patient_id = request.session.get('current_patient')
         print(f"current patient id: {id}")
@@ -220,11 +248,8 @@ def add_test(request):
         # check to see if the medical test is in the db
         test_in_db = Medical_Test.objects.filter(hospital_visit=current_hospital_visit)
         test_in_db = test_in_db.filter(test_name = test_name).first()
-        print("=================================")
         print("---IN THE DB")
         print(test_in_db)
-        print("=================================")
-
 
         if test_in_db:
             print("Yes it is, removing it")
