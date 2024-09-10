@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // console.log("jello");
+    console.log("jello");
 
     $(".list-group-item-action").click(function(){
         $(this).find(".panel").slideToggle("slow");
@@ -10,9 +10,58 @@ $(document).ready(function() {
         event.stopPropagation(); // Prevent event bubbling
     });
 
+    // To delete tests in the database on the edit patient page
+    $('.btn.btn-primary.btn-sm.test-delete').click(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("trying to delete a test!");
 
+        console.log(e.target.parentElement)
+        // Hide the element that was clicked
+        var test;
+        if (e.target.parentElement.tagName == "LI"){
+            console.log('it is a list item')
+            e.target.parentElement.style.display = 'none';
+            test = e.target.parentElement.innerText;
+        } else if (e.target.parentElement.tagName =="BUTTON") {
+            console.log('it is a button')
+            e.target.parentElement.parentElement.style.display = 'none';
+            test = e.target.parentElement.parentElement.innerText;
+        }
+        // e.target.style.display = 'none';
+
+        console.log(`The test:${test}`);
+        fetch('/delete-test-edit-page/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                'test': test
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle success response if needed
+            console.log("I have a reponse!");
+            console.log(data);
+        })
+        .catch(error => {
+            // Handle error response if needed
+            console.error('Error:', error);
+        });
+
+    });
+
+    // To add or remove tests from the diagnosis page
     $('.test-item').click(function(e) {
-        event.stopPropagation();
+        e.stopPropagation();
         // console.log("clicking buttons");
 
         // var test = "heyo"; // Get the text of the clicked li
@@ -32,9 +81,6 @@ $(document).ready(function() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
-
-
             return response.json();
         })
         .then(data => {
