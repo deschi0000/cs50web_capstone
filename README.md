@@ -41,12 +41,16 @@ Lastly, the schemas for the database (in this case patients, medical tests, hosp
 ### Requirements and startup
 
 Please ensure that you have the following libraries installed:
-
+```bash
 django-boostrap-v5
 fontawesome
 google-generativeai
+```
 
-The application can be run normally by calling python manage.py runserver.
+The application can be run normally by calling 
+```bash
+  python manage.py runserver
+```
 
 
 
