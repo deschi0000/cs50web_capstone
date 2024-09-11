@@ -18,11 +18,9 @@
                             {% for item in diagnosis.suggested_tests%}
                                 {% if item in tests_in_db %}
                                     <li class="test-item clicked"><i class="fa-solid fa-minus"></i>   {{ item }}</li>
-                                    <li>{{tests_in_db}}</li>
                                     {% else %}
                                 <!-- <button class="my-button">Click me</button> -->
                                     <li class="test-item"><i class="fa-solid fa-plus"></i>   {{ item }}</li>
-                                    <li>{{tests_in_db}}</li>
                                     {% endif %}
                             {% endfor %}
                         </ul>
