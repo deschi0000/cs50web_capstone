@@ -11,20 +11,10 @@ from medicAI.models import Hospital_Visit, Patient, Medical_Test
 import config
 
 
-# Create your views here.
-
 def index(request):
-
     return render(request, "medicAI/index.html")
 
 def patientlist(request):
-
-    # Use try/except to find patients in the db
-    # all_patients = Patient.objects.all()
-    # context = {
-    #     "patients": all_patients,
-    # }
-    # return render(request, "medicAI/index.html", context)
 
     # Get all of the hospital visits and also the information
     # of each of the patients as well
@@ -44,12 +34,10 @@ def patient_info(request, patient_id):
     # Get the most recent visit
     visit_list = Hospital_Visit.objects.filter(patient=patient_id).order_by('-symptom_start_date')
     most_recent_visit = visit_list.first()
-    # for i in visit_list:       # for debugging if checking for multiple visits.
-    #     print(i)
 
     # Recieve the appropriate tests for the hostipal visit / patient
     tests = Medical_Test.objects.filter(hospital_visit=most_recent_visit)
-    # print(tests)
+
 
     # Set a current patient so that the ID can be pulled when adding tests
     # (this will get reset by navigating throught the corres. urls...)
@@ -72,7 +60,6 @@ def edit_patient_info(request, patient_id):
 
 
     if request.method == 'POST':
-        print("trying to post form")
 
         #Retrieve the values of the input fields being Posted
         acuity = request.POST.get('acuity')
@@ -88,11 +75,6 @@ def edit_patient_info(request, patient_id):
             seen_nurse = True
         else:
             seen_nurse = False
-        
-        print("===================================================")
-        print(doctor_diagnosis)
-        print(prescription)
-        print("===================================================")
 
         current_visit.acuity = acuity
         current_visit.temperature = temperature
@@ -121,50 +103,22 @@ def diagnosis(request, patient_id):
     genai.configure(api_key=config.gemini_ai_api)
     model = genai.GenerativeModel('gemini-pro')
 
-
     # Retrieve the symptoms from this visit
     visit_list = Hospital_Visit.objects.filter(patient=patient_id).order_by('-symptom_start_date')
     current_visit = visit_list.first()
     tests_in_db = Medical_Test.objects.filter(hospital_visit=current_visit)
     tests_in_db = [i.test_name.strip() for i in tests_in_db]
-    # print("THESE TESTS FOR PATIENT:")
-    # print(tests_in_db)
 
-    # print("SYMPTOMS:")
-    # print("=========================================")
-    # print(current_visit.symptoms.split(', '))
     symptom_array = current_visit.symptoms.split(', ')
-    # print("=========================================")
-
-
 
     # Check if JSON response is already stored in localStorage
     data = request.session.get('diagnosis_data_{}'.format(patient_id))
-    
-    # # Get the suggested test list
-    # suggested_test_list = [i['suggested_tests'] for i in data['data']]
-    # # flatten out the array of arrays
-    # flat_list = [item for sublist in suggested_test_list for item in sublist]
-    # data['flat_list'] = flat_list
-
 
     if data and data['symptoms'] == symptom_array:
         # return JsonResponse(data)
         # Add the tests already in the system
         # Compare this set to the list and list any minuses for the tests that can be removed
         data['tests_in_db'] = tests_in_db
-        # stored_data['tests_in_system'] = list(tests_in_db.values_list('test_name', flat=True))
-        
-        # Get the suggested tests out of the data list into an array
-
-
-        # print("THESE TESTS FOR PATIENT:")
-        # print(stored_data['tests_in_system'])
-        print("=============================================")
-
-        print(tests_in_db)
-        print("=============================================")
-
 
         return render(request, "medicAI/diagnosislist.html", data) 
     
@@ -206,23 +160,15 @@ def delete_test_edit_page(request):
         test_name = data.get('test')
         test_name = test_name.strip()
         test_name = " " + test_name
-        print("the test:")
-        print(test_name)
+
         current_patient_id = request.session.get('current_patient')
         current_hospital_visit = Hospital_Visit.objects.filter(patient=current_patient_id).first()
-        print(current_hospital_visit)
+
         
         test_in_db = Medical_Test.objects.filter(hospital_visit=current_hospital_visit)
-        print("WHAT IS TEST_IN_DB??0")
-        print(test_in_db)
         test_in_db = test_in_db.filter(test_name = test_name).first()
         
-
-        print("WHAT IS TEST_IN_DB??1")
-        print(test_in_db)
         if test_in_db:
-            # TODO - Right now it will delete it with the fetch, 
-            # but the data will not persist in the database~~~
             test_in_db.delete()
             return JsonResponse({'message': 'Test removed successfully'})
         else:
@@ -242,21 +188,16 @@ def add_test(request):
 
         # get the hospital visit queryset
         current_hospital_visit = Hospital_Visit.objects.filter(patient=current_patient_id).first()
-        print("current visit:")
         print(current_hospital_visit)
 
         # check to see if the medical test is in the db
         test_in_db = Medical_Test.objects.filter(hospital_visit=current_hospital_visit)
         test_in_db = test_in_db.filter(test_name = test_name).first()
-        print("---IN THE DB")
-        print(test_in_db)
 
         if test_in_db:
-            print("Yes it is, removing it")
             test_in_db.delete()
 
         else:
-            print("test not yet in DB, putting it in")
             test_to_add = Medical_Test(
             hospital_visit=current_hospital_visit,
             test_name=test_name
