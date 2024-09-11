@@ -5,8 +5,8 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container intro" style="margin-top: 0 auto; margin-top: 3rem; width: 300; text-align: justify;">
         <h1 class="display-20">Welcome to my Captstone Project for cs50web</h1>
-        <p class="lead">Dave von Deschwanden</p>
-        <p class="lead">GITHUB: <a href="https://github.com/deschi0000/cs50web_capstone"
+        <p class="lead"><b>Dave von Deschwanden</b></p>
+        <p class="lead"><b>GITHUB:</b> <a href="https://github.com/deschi0000/cs50web_capstone"
                 target="_blank">https://github.com/deschi0000/cs50web_capstone</a></p>
         <p class="lead">Django, Javascript, HTML, CSS</p>
         <p class="lead">
@@ -15,39 +15,22 @@
             Since there is a strain on the Canadian health care system, resulting in overworked medical workers, the
             idea to make an AI-aid for diagnosing patients, would help streamline the work for doctors and nurses, and
             also reduce the potential of misdiagnoses.
-
-            This system focuses more on the user as a medical professional; the patients already registered in the
-            system are done so using a stub which at this point in development represents the user already being
-            registered and having described their symptoms (a self-check in system would be really cool, although this
-            could also just have been done manually), as such the patients are already registered with symptoms.
-
-            The next step is was using the Gemini API that would take these symptoms and convert them into a meaningful
-            possible diagnoses. The application will continually update itself depending on the symptoms listed for each
-            individual patient. It will also output the diagnoses in descending percentages of possibility, along with
-            the associated tests that can be added or removed for the patient.
-
-            This capability would be helpful to be used to help elaborate on any suggested diagnoses, providing another
-            quickly accessible second opinion that may be useful in the treatement of a patient.
-
-            The rest of the application utilized the user model (medical professional), making sure to hide sensitive
-            patient data from anyone not authorized to use the system. In lew of registering, the assumption for this
-            application is that the system administrator of the hospital has added authorized personal into the system.
         </p>
         <p class="lead">
-            Contained in each file</br></br>
+            </br><b>Contained in each file:</b>
 
-            views.py - The controller logic for rendering the different pages of the progam to the user in the view.
+            </br><b>views.py</b> - The controller logic for rendering the different pages of the progam to the user in the view.
 
-            helpers.py - Helper functions dedicated to parsing the Json return objects used with the Gemini integration.
+            </br><b>helpers.py</b> - Helper functions dedicated to parsing the Json return objects used with the Gemini integration.
 
-            script.js - Using JS to get cookies/CSRF tokens, show notifications and impleement some Jquery to UI design
-            (specifically adding and removing tests from the AI-diagnosis section).
+            </br><b>script.js</b> - Using JS to get cookies/CSRF tokens, show notifications and impleement some Jquery to UI design
+                (specifically adding and removing tests from the AI-diagnosis section).
 
-            styles.css - While bootstrap takes care of most of the look, this file focuses mainly on mobile
+            </br><b>styles.css</b> - While bootstrap takes care of most of the look, this file focuses mainly on mobile
             responsiveness.
         </p>
         <p class="lead">
-            Distinctiveness:</br></br>
+            <b>Distinctiveness:</b></br></br>
 
             This project is distintive in that it serves as a tool to aid ER medical staff in making decisions based on
             their patients. This project utilizes bootstrap and the fontawesome libraries to help make the site more
@@ -56,15 +39,13 @@
             user in making and/or prioritizing tests of the patients in the system.
         </p>    
         <p class="lead">
-            Complexity:</br></br>
+            <b>Complexity:</b></br></br>
 
             Finding a way to consistenly query and parse data brought back through the Gemini API required specialized
             helper functions to get the job done. The schemas for the database (in this case patients, medical tests,
             hospital visits, etc.) provided their own challenge in understanding the levels of normalization required to
             consistenly store and retrieve data, requiring the reworking of my databasee a few times.
-
         </p>
-
     </div>
 </div>
 

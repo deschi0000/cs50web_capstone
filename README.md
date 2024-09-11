@@ -32,7 +32,23 @@ This project is distintive in that it serves as a tool to aid ER medical staff i
 
 ### Complexity
 
-Finding a way to consistenly query and parse data brought back through the Gemini API required specialized helper functions to get the job done. The schemas for the database (in this case patients, medical tests, hospital visits, etc.) provided their own challenge in understanding the levels of normalization required to consistenly store and retrieve data, requiring the reworking of my databasee a few times.
+Originally, there was a semi-reliable Medical diagnosis API that would work for Express applications, but was outdated and not maintained for python; after weeks and weeks of trying to find a workaround, and getting into contact with the authors of the API/repo, the decision was made to go entirely off of the AI API offered by Gemini. 
+
+Finding a way to consistenly query and parse data brought back through the Gemini API was the first hurdle of this new route and required specialized helper functions that had to be written in JS and called in the script file. Second, I had to store and call and/or re-store patient information in local storage to cut down constantly calling the API whenever the page was loaded/reloaded. Not only was not doing this token-heavy, but also slowed down the application too much for a nice user experience. Now only the first call of each new symptom adjustment takes a bit longer, which each revisit to the diagnosis page is much more faster.
+
+Lastly, the schemas for the database (in this case patients, medical tests, hospital visits, etc.) provided their own challenge in understanding the levels of normalization required to consistenly store and retrieve data, requiring the reworking of my databasee a few times.
+
+### Requirements and startup
+
+Please ensure that you have the following libraries installed:
+
+django-boostrap-v5
+fontawesome
+google-generativeai
+
+The application can be run normally by calling python manage.py runserver.
+
+
 
 ### Tech Stack
 

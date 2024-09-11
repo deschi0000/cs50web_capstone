@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    console.log("jello");
+    console.log("loaded suceesfully");
 
     $(".list-group-item-action").click(function(){
         $(this).find(".panel").slideToggle("slow");
